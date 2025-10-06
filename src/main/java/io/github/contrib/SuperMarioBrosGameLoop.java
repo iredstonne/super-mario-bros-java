@@ -13,10 +13,19 @@ public class SuperMarioBrosGameLoop extends AnimationTimer {
         this.canvas = canvas;
         this.context = canvas.getGraphicsContext2D();
         this.tiles = new SpriteSheet(ImageLoader.load("/assets/tiles.png"));
+        this.tiles.defineTile("ground", 0, 0);
+        this.tiles.defineTile("sky", 3, 23);
     }
 
     @Override
     public void handle(long now) {
-        this.tiles.draw(this.context);
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 12; j++) {
+                this.tiles.drawTile(this.context, "sky", i, j);
+            }
+            for (int j = 12; j < 14; j++) {
+                this.tiles.drawTile(this.context, "ground", i, j);
+            }
+        }
     }
 }
